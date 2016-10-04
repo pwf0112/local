@@ -48,7 +48,7 @@
                 <div class="form-group form-group-sm">
                     <label class="col-sm-2 control-label" for="posi">POS机</label>
                     <div class="col-sm-10">
-                        <span class="form-control-static" style="font-size: 12px; padding-right: 15px;">通联POS机</span>
+                        <span class="form-control-static" style="font-size: 12px; padding-right: 15px;">通联POS机 - 203</span>
                         <button type="button" class="btn btn-info btn-xs">变更POS机</button>
                     </div>
                 </div>
