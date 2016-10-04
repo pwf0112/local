@@ -12,5 +12,9 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 });
+
+Route::get('cash/add', function () {
+	return view('vendor.cash.add');
+})->name('cash.add');
