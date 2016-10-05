@@ -33,10 +33,10 @@
                 </div>
                 <strong>硬件清单</strong>
                 <hr>
-                <div class="form-group form-group-sm">
+                <div id="app-zj" class="form-group form-group-sm">
                     <label class="col-sm-2 control-label" for="posi">主机</label>
                     <div class="col-sm-10">
-                        <button type="button" class="btn btn-danger btn-xs">添加主机</button>
+                        <button type="button" class="btn btn-danger btn-xs" @click="mps">添加主机</button>
                     </div>
                 </div>
                 <div class="form-group form-group-sm">
@@ -88,4 +88,17 @@
             </form>
         </div>
     </div>
+@stop
+
+@section('boot')
+    <script>
+        new Vue({
+            el: '#app-zj',
+            methods: {
+                mps: function () {
+                    layer.alert('ok');
+                }
+            }
+        });
+    </script>
 @stop
