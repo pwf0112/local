@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('flat/css/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ asset('flat/css/flat-ui.min.css') }}"  rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('layer/skin/layer.css') }}">
     <link rel="shortcut icon" href="{{ asset('flat/img/favicon.ico') }}">
     <style>
         ::-webkit-scrollbar {
@@ -24,6 +25,7 @@
 <script src="{{ asset('flat/js/vendor/jquery.min.js') }}"></script>
 <script src="{{ asset('flat/js/vendor/video.js') }}"></script>
 <script src="{{ asset('flat/js/flat-ui.min.js') }}"></script>
+<script src="{{ asset('layer/layer.js') }}"></script>
 <script src="{{ asset('js/vue.min.js') }}"></script>
 @yield('boot')
 
