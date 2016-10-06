@@ -14,14 +14,14 @@
 @stop
 
 @section('content')
-    <div id="form-cash-add">
+<div id="form-cash-add">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"><span class="glyphicon glyphicon-plus"></span> 添加收银机</h3>
         </div>
         <div class="panel-body">
             <form class="form-horizontal" role="form" @submit.prevent="submit(form)">
-                <strong>基础信息</strong>
+                <strong>基础信息 @{{ form.mac.id }}</strong>
                 <hr>
                 <div class="form-group form-group-sm">
                     <label class="col-sm-2 control-label" for="posi">位置</label>
@@ -43,6 +43,13 @@
                 </div>
                 <strong>硬件清单</strong>
                 <hr>
+                <choose id="ch1" title="测试标题" btn-name="按钮名称" :res-data.sync="form.mac">
+                    <ts :lists="lists.mac" :curr="form.mac.id"></ts>
+                </choose>
+                <choose id="ch2" title="打印机" btn-name="打印机" :res-data.sync="form.pri">
+                    <ts :lists="lists.pri" :curr="form.pri.id"></ts>
+                </choose>
+
                 <div class="form-group form-group-sm">
                     <label class="col-sm-2 control-label" for="posi">主机</label>
                     <div class="col-sm-10">
@@ -102,135 +109,49 @@
         </div>
     </div>
 
-    <div id="ale" style="padding: 20px;">
-        <form class="form-horizontal" role="form">
+
+
+    <template id="choose">
+        <div :id="id">
             <div class="form-group form-group-sm">
-                <label class="col-sm-2 control-label" for="posi">输入编号</label>
-                <div class="col-sm-5">
-                    <input class="form-control" type="text" id="posi" v-model="com.code" placeholder="位置为3位数字编号">
+                <label class="col-sm-2 control-label" for="posi">@{{ title }}</label>
+                <div class="col-sm-10">
+                    <span class="form-control-static form-control-static-extend"><span v-text="resText"></span></span>
+                    <button type="button" class="btn btn-xs" :class="cmpBtnColor" @click="xz()">@{{ cmpBtnName }}</button>
                 </div>
             </div>
 
-            <div class="form-group form-group-sm">
-                <label class="col-sm-2 control-label" for="posi">选择型号</label>
-                <div class="col-sm-8">
-                    <select class="form-control" v-model="index">
-                        <option v-for="(index, list) in lists" :value="index"> @{{ list.name }} </option>
-                    </select>
+            <slot>
+                如果没有分发内容则显示我。
+            </slot>
+        </div>
+    </template>
+
+    <template id="ts">
+        <div class="ale" style="padding: 20px;">
+            <form class="form-horizontal" role="form"  @submit.prevent="">
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label" for="posi">输入编号</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" type="text" id="posi" v-model="code" @keyup="cmpData()" placeholder="位置为3位数字编号">
+                    </div>
                 </div>
-            </div>
-        </form>
-    {{--</div>--}}
-        {{--<div v-for="list in lists">@{{ list.name }}</div>--}}
-    {{--</div>--}}
+
+                <div class="form-group form-group-sm">
+                    <label class="col-sm-2 control-label" for="posi">选择型号</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" v-model="index" @change="cmpData()">
+                            <option v-if="!resData.id"> 请选择型号 </option>
+                            <option v-for="(index, list) in lists" :value="index" :selected="list.id==curr"> @{{ list.name }} </option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </template>
+</div>
 @stop
 
 @section('boot')
-    <script>
-        new Vue({
-            el: '#form-cash-add',
-            data: {
-                form: {
-                    posi: '',
-                    port: '',
-                    ip: '192.168.0.100',
-                    pos: {
-                        id: 1,
-                        name: '通联收银机',
-                        code: '203'
-                    },
-                    pri: {
-                        id: 1,
-                        name: '打印机-共享',
-                        code: ''
-                    },
-                    mac: {
-                        id: 1,
-                        name: '新主机',
-                        code: '101'
-                    },
-                    bil: {
-                        id: 2,
-                        name: '通用小票打印机',
-                        code: '203'
-                    },
-                    sys: {
-                        id: 1,
-                        name:'WINXP_POS_HK380'
-                    }
-                },
-                lists: [
-                    {id: 12, name: 'POS_12'},
-                    {id: 13, name: 'POS_13'},
-                    {id: 14, name: 'POS_14'},
-                    {id: 15, name: 'POS_15'}
-                ],
-                com: {
-                    id: 0,
-                    name: '',
-                    code: ''
-                },
-                index: null
-            },
-            computed: {
-                bil_txt: function () {
-                    return this.data_txt(this.form.bil);
-                },
-                pos_txt: function () {
-                    return this.data_txt(this.form.pos);
-                },
-                mac_txt: function () {
-                    return this.data_txt(this.form.mac);
-                },
-                pri_txt: function () {
-                    return this.data_txt(this.form.pri);
-                }
-            },
-            watch: {
-                'index': function (value) {
-                    this.com = this.lists[value];
-                }
-            },
-            methods: {
-                choose: function (tag) {
-//                    layer.alert(this.form[tag].name);
-                    layer.open({
-                        vue: this,
-                        type: 1,
-                        area: '510px',
-                        title: '添加收银机',
-                        content: $('#ale'),
-                        btn: ['确定', '取消'],
-                        yes: function (index) {
-                            console.log([this.vue.com.code, tag]);
-                            this.vue.form[tag] = this.vue.com;
-                            layer.close(index);
-                        },
-                        cancel: function (index) {
-
-                        }
-                    });
-                },
-                submit: function (form) {
-                    //询问框
-                    layer.alert('sdfsdfsdf');
-
-                },
-                data_txt: function (data) {
-                    if (data.name != '' && data.code != '') {
-                        return data.name + " - " + data.code;
-                    } else if (data.name != '') {
-                        return data.name;
-                    } else {
-                        return '';
-                    }
-                }
-            }
-        });
-
-        Vue.ready(function () {
-            $('#ale').hide();
-        });
-
-    </script>
+    <script src="{{ asset('js/vue/cash/add.js?21') }}"></script>
 @stop

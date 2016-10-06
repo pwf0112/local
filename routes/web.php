@@ -18,3 +18,12 @@ Route::get('/', function () {
 Route::get('cash/add', function () {
 	return view('vendor.cash.add');
 })->name('cash.add');
+
+Route::get('json', function () {
+	return [
+		['id' => 1, 'name' => 'POS_HK380_1'],
+		['id' => 2, 'name' => 'POS_HK380_2'],
+		['id' => 3, 'name' => 'POS_HK380_3'],
+		['id' => 4, 'name' => 'POS_HK380_4']
+	];
+});
