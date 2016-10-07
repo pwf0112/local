@@ -2,12 +2,6 @@
 
 @section('head')
     @include('inc.csrf')
-    <style>
-        .form-control-static-extend {
-            font-size: 12px;
-            padding-right: 15px;
-        }
-    </style>
 @stop
 
 @section('header')
@@ -43,6 +37,7 @@
                             <input class="form-control" type="text" id="ip" v-model="form.ip" placeholder="请输入IP地址">
                         </div>
                     </div>
+
                     <strong>硬件清单</strong>
                     <hr>
                     <device id="mac" title="主机" btn-name="主机" :res-data.sync="form.mac">
