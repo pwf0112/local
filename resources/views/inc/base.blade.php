@@ -27,6 +27,7 @@
 <script src="{{ asset('flat/js/vendor/video.js') }}"></script>
 <script src="{{ asset('flat/js/flat-ui.min.js') }}"></script>
 <script src="{{ asset('layer/layer.js') }}"></script>
+<script src="{{ asset('js/config.js') }}"></script>
 <script src="{{ asset('js/vue.min.js') }}"></script>
 @yield('boot')
 
