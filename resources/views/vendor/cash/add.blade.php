@@ -57,24 +57,23 @@
                     </device>
 
 
-                    <strong>系统镜像 @{{ form.sys.id }}</strong>
+                    <strong>系统镜像</strong>
                     <hr>
                     <div class="form-group form-group-sm">
                         <label class="col-sm-2 control-label" for="posi">选择镜像</label>
                         <div class="col-sm-5">
-                            <select class="form-control" v-model="form.sys.id">
-                                <option value="12">POS_WINXP_HK380_20160112</option>
-                                <option>POS_HK380_20160112</option>
-                                <option>POS_HK380_20160112</option>
-                                <option>POS_WINXP_HK380_20160112</option>
-                                <option>POS_HK380_20160112</option>
-                                <option>POS_HK380_20160112</option>
+                            <select class="form-control" v-model="form.sys">
+                                <option v-if="!form.sys" selected :value="null">请选择系统镜像</option>
+                                <option v-for="(index, item) in lists.sys" :selected="item.id == form.sys"
+                                        :value="item.id">
+                                    @{{ item.name }}
+                                </option>
                             </select>
                         </div>
                     </div>
 
                     <div class="form-group form-group-sm">
-                        <label class="col-sm-2 control-label" for="posi"></label>
+                        <label class="col-sm-2 control-label"></label>
                         <div class="col-sm-10">
                             <button type="submit" class="btn btn-primary btn-sm">保 存</button>
                         </div>
@@ -93,5 +92,5 @@
     <script src="{{ asset('vendor/inc/setup_csrf.js?1') }}"></script>
     <script src="{{ asset('vendor/component/device.js?1') }}"></script>
     <script src="{{ asset('vendor/component/selector.js?1') }}"></script>
-    <script src="{{ asset('js/vue/cash/add.js?24') }}"></script>
+    <script src="{{ asset('js/vue/cash/add.js?25') }}"></script>
 @stop

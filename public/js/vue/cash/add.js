@@ -21,10 +21,7 @@ new Vue({
                 id: 2,
                 code: '203'
             },
-            sys: {
-                id: 1,
-                name:'WINDOWS_XP_POS_HK380'
-            }
+            sys: null
         },
         lists: {
             mac: [
@@ -50,6 +47,12 @@ new Vue({
                 {id: 2, name: 'PRI_12'},
                 {id: 3, name: 'PRI_13'},
                 {id: 4, name: 'PRI_14'}
+            ],
+            sys: [
+                {id: 1, name: 'SYS_11'},
+                {id: 2, name: 'SYS_12'},
+                {id: 3, name: 'SYS_13'},
+                {id: 4, name: 'SYS_14'}
             ]
         }
     },
