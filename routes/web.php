@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -26,4 +26,9 @@ Route::get('json', function () {
 		['id' => 3, 'name' => 'POS_HK380_3'],
 		['id' => 4, 'name' => 'POS_HK380_4']
 	];
+});
+
+Route::post('post01', function (Request $request) {
+	\Log::alert($request->input());
+	return [];
 });
