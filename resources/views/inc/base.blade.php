@@ -8,6 +8,7 @@
     <link href="{{ asset('flat/css/flat-ui.min.css') }}"  rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('layer/skin/layer.css') }}">
     <link rel="shortcut icon" href="{{ asset('flat/img/favicon.ico') }}">
+    <link rel="stylesheet" href="{{ asset('css/base.css') }}">
     <style>
         ::-webkit-scrollbar {
             width:0;
