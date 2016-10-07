@@ -56,8 +56,10 @@ Vue.component('device', {
     },
     events: {
         'ret-data': function (data) {
-            this.resData.id = data.id;
-            this.resData.code = data.code;
+            this.resData = {
+                id: data.id,
+                code: data.code
+            };
             this.resText = this.cmpResText(data);
         }
     },
