@@ -28,7 +28,8 @@
 <script src="{{ asset('flat/js/flat-ui.min.js') }}"></script>
 <script src="{{ asset('layer/layer.js') }}"></script>
 <script src="{{ asset('js/config.js') }}"></script>
-<script src="{{ asset('js/vue.min.js') }}"></script>
+<script src="{{ asset('js/vue.js') }}"></script>
+{{--<script src="{{ asset('js/vue.min.js') }}"></script>--}}
 @yield('boot')
 
 <footer style="height: 35px; line-height: 35px; text-align: center; position: fixed; bottom: 0; width: 100%;">
