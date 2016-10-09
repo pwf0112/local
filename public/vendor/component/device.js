@@ -3,7 +3,8 @@ Vue.component('device', {
     props: ['id', 'title', 'resData', 'btnName'],
     data: function () {
         return {
-            resText: ''
+            resText: '',
+            okClick: false
         }
     },
     computed: {
@@ -39,7 +40,8 @@ Vue.component('device', {
                 content: $('#'+ this.id +' > .ale'),
                 btn: ['确定', '取消'],
                 yes: function (index) {
-                    this.comp.$broadcast('c-ok', index, '请选择型号');
+                    this.comp.okClick = !this.comp.okClick;
+                    // console.log([this.comp.okClick]);
                 },
                 cancel: function (index) {  }
             });
@@ -63,7 +65,7 @@ Vue.component('device', {
             this.resText = this.cmpResText(data);
         }
     },
-    ready: function () {
+    mounted: function () {
         $('.ale').hide();
     }
 });

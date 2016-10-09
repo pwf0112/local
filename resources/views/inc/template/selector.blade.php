@@ -13,7 +13,7 @@
                 <div class="col-sm-8">
                     <select class="form-control" v-model="index">
                         <option v-if="curr.id === null" :value="null" selected> 请选择型号 </option>
-                        <option v-for="(index, list) in lists" :value="index" :selected="list.id==curr.id"> @{{ list.name }} </option>
+                        <option v-for="(list, index) in lists" :value="index" :selected="list.id==curr.id"> @{{ list.name }} </option>
                     </select>
                 </div>
             </div>
