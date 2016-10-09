@@ -1,6 +1,6 @@
 Vue.component('selector', {
     template: '#selector',
-    props: ['lists', 'curr'],
+    props: ['lists', 'curr', 'okClick'],
     data: function () {
         return {
             index: null,
@@ -18,6 +18,11 @@ Vue.component('selector', {
             }
         }
     },
+    watch: {
+        'okClick': function (newValue) {
+            console.log([newValue]);
+        }
+    },
     events: {
         'c-ok': function (index, msg) {
             if (this.index === null) {
@@ -31,7 +36,7 @@ Vue.component('selector', {
     created: function () {
         this.code = this.curr.code;
     },
-    ready: function () {
+    mounted: function () {
         this.cmpData();
     }
 });

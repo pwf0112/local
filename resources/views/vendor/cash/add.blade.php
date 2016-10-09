@@ -44,17 +44,17 @@
                         <selector :lists="lists.mac" :curr="form.mac"></selector>
                     </device>
 
-                    <device id="pir" title="打印机" btn-name="打印机" :res-data.sync="form.pri">
-                        <selector :lists="lists.pri" :curr="form.pri"></selector>
-                    </device>
+                    {{--<device id="pir" title="打印机" btn-name="打印机" :res-data.sync="form.pri">--}}
+                        {{--<selector :lists="lists.pri" :curr="form.pri"></selector>--}}
+                    {{--</device>--}}
 
-                    <device id="pos111" title="POS机" btn-name="POS机" :res-data.sync="form.pos">
-                        <selector :lists="lists.pos" :curr="form.pos"></selector>
-                    </device>
+                    {{--<device id="pos" title="POS机" btn-name="POS机" :res-data.sync="form.pos">--}}
+                        {{--<selector :lists="lists.pos" :curr="form.pos"></selector>--}}
+                    {{--</device>--}}
 
-                    <device id="bil" title="小票机" btn-name="小票机" :res-data.sync="form.bil">
-                        <selector :lists="lists.bil" :curr="form.bil"></selector>
-                    </device>
+                    {{--<device id="bil" title="小票机" btn-name="小票机" :res-data.sync="form.bil">--}}
+                        {{--<selector :lists="lists.bil" :curr="form.bil"></selector>--}}
+                    {{--</device>--}}
 
 
                     <strong>系统镜像</strong>
@@ -64,7 +64,7 @@
                         <div class="col-sm-5">
                             <select class="form-control" v-model="form.sys">
                                 <option v-if="!form.sys" selected :value="null">请选择系统镜像</option>
-                                <option v-for="(index, item) in lists.sys" :selected="item.id == form.sys"
+                                <option v-for="(item, index) in lists.sys" :selected="item.id == form.sys"
                                         :value="item.id">
                                     @{{ item.name }}
                                 </option>
@@ -89,8 +89,8 @@
 @stop
 
 @section('boot')
-    <script src="{{ asset('vendor/inc/setup_csrf.js?1') }}"></script>
-    <script src="{{ asset('vendor/component/device.js?1') }}"></script>
-    <script src="{{ asset('vendor/component/selector.js?1') }}"></script>
-    <script src="{{ asset('js/vue/cash/add.js?25') }}"></script>
+    <script src="{{ asset('vendor/inc/setup_csrf.js?2') }}"></script>
+    <script src="{{ asset('vendor/component/device.js?4') }}"></script>
+    <script src="{{ asset('vendor/component/selector.js?4') }}"></script>
+    <script src="{{ asset('js/vue/cash/add.js?26') }}"></script>
 @stop
