@@ -52,7 +52,7 @@ Vue.component('device', {
         getText: function () {
             this.curr.name = this.curr.id != null ? this.list[this.curr.id] : '';
 
-            if (this.curr.name != '' && this.curr.code != '') {
+            if (this.curr.name && this.curr.code) {
                 return this.curr.name + " - " + this.curr.code;
             } else if (this.curr.name != '') {
                 return this.curr.name;
