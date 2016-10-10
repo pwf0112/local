@@ -12,10 +12,10 @@ class Data extends Controller
     public function handle()
     {
         $demo = [
-            ['id' => 1, 'name' => 'SYS_01'],
-            ['id' => 2, 'name' => 'SYS_02'],
-            ['id' => 3, 'name' => 'SYS_03'],
-            ['id' => 4, 'name' => 'SYS_04'],
+			1 => 'SYS_01',
+			2 => 'SYS_02',
+			3 => 'SYS_03',
+			4 => 'SYS_04'
         ];
 
         $lists = [
@@ -32,7 +32,7 @@ class Data extends Controller
             'ip' => '',
             'sys' => null,
             'mac' => ['id' => 1, 'code' => 'mac101'],
-            'pri' => ['id' => 4, 'code' => '@pri_4'],
+            'pri' => ['id' => null, 'code' => '@pri_4'],
             'bil' => ['id' => 2, 'code' => 'bil201'],
             'pos' => ['id' => 3, 'code' => 'pos403'],
         ];
