@@ -1,71 +1,69 @@
 Vue.component('device', {
     template: '#device',
-    props: ['id', 'title', 'resData', 'btnName'],
+    props: ['name', 'current', 'list', 'type'],
     data: function () {
         return {
-            resText: '',
-            okClick: false
+            curr: {
+                id: this.current.id,
+                code: this.current.code,
+                name: ''
+            },
+            text: ''
         }
     },
     computed: {
-        cmpBtnColor: function () {
-            if (this.resText != '') {
+        btnColor: function () {
+            if (this.text != '') {
                 return 'btn-info';
             } else {
                 return 'btn-danger';
             }
         },
-        cmpBtnName: function () {
-            if (this.resText != '') {
-                return '变更' + this.btnName;
+        btnName: function () {
+            if (this.text != '') {
+                return '变更' + this.name;
             } else {
-                return '添加' + this.btnName;
-            }
-        },
-        cmpTsTitle: function () {
-            if (this.title != '') {
-                return '变更' + this.title;
-            } else {
-                return '添加' + this.title;
+                return '添加' + this.name;
             }
         }
     },
     methods: {
-        xz: function () {
+        choose: function () {
             layer.open({
-                comp: this,
+                prent: this,
                 type: 1,
                 area: '510px',
-                title: this.cmpTsTitle,
-                content: $('#'+ this.id +' > .ale'),
+                title: this.btnName,
+                content: $(this.$el).children('.ale'),
                 btn: ['确定', '取消'],
                 yes: function (index) {
-                    this.comp.okClick = !this.comp.okClick;
-                    // console.log([this.comp.okClick]);
+                    this.prent.text = this.prent.getText();
+
+                    if (this.prent.curr.name) {
+                        this.prent.$emit('changed', this.prent.curr, this.prent.type);
+                        layer.close(index);
+                    } else {
+                        layer.msg('请选择' + this.prent.name + '型号');
+                    }
                 },
                 cancel: function (index) {  }
             });
         },
-        cmpResText: function (data) {
-            if (data.name != '' && data.code != '') {
-                return data.name + " - " + data.code;
-            } else if (data.name != '') {
-                return data.name;
+        getText: function () {
+            this.curr.name = this.curr.id != null ? this.list[this.curr.id] : '';
+
+            if (this.curr.name != '' && this.curr.code != '') {
+                return this.curr.name + " - " + this.curr.code;
+            } else if (this.curr.name != '') {
+                return this.curr.name;
             } else {
                 return '';
             }
         }
     },
-    events: {
-        'ret-data': function (data) {
-            this.resData = {
-                id: data.id,
-                code: data.code
-            };
-            this.resText = this.cmpResText(data);
-        }
-    },
     mounted: function () {
         $('.ale').hide();
+
+        this.text = this.getText();
     }
 });
