@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Cash;
 
+use App\Models\System;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -11,31 +12,26 @@ class Data extends Controller
 {
     public function handle()
     {
-        $demo = [
-			1 => 'SYS_01',
-			2 => 'SYS_02',
-			3 => 'SYS_03',
-			4 => 'SYS_04'
-        ];
+		$dtype = \App\Models\Dtype::select('id', 'code')->get()->pluck('code', 'id')->toArray();
 
-        $lists = [
-            'mac' => $demo,
-            'pri' => $demo,
-            'pos' => $demo,
-            'bil' => $demo,
-            'sys' => $demo
-        ];
+		$lists['sys'] = System::select('id', 'name')->get()->pluck('name', 'id')->toArray();
+		$devices = \App\Models\Device::select('id', 'name', 'type')->get()->toArray();
+		foreach ($devices as $device) {
+			$lists[$dtype[$device['type']]][$device['id']] = $device['name'];
+		}
+
+		$default = ['id' => null, 'name' => ''];
 
         $form = [
             'posi' => '',
             'port' => '',
             'ip' => '',
-            'sys' => null,
-            'mac' => ['id' => 1, 'code' => 'mac101'],
-            'pri' => ['id' => null, 'code' => '@pri_4'],
-            'bil' => ['id' => 2, 'code' => 'bil201'],
-            'pos' => ['id' => 3, 'code' => 'pos403'],
+            'sys' => null
         ];
+
+		foreach ($dtype as $type) {
+			$form[$type] = $default;
+		}
 
         $data = [
             'form' => $form,
